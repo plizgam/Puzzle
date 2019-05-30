@@ -12,6 +12,10 @@ public class Main extends Application {
 
     public static Stage myStage;
 
+
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         myStage = primaryStage;
