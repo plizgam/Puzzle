@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="407.0" prefWidth="599.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerScores">
+   <children>
+      <TextArea fx:id="ScoresArea" editable="false" layoutX="34.0" layoutY="104.0" prefHeight="269.0" prefWidth="534.0" styleClass="PointsAres" wrapText="true" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="104.0" />
+      <Label alignment="CENTER" layoutX="247.0" layoutY="26.0" styleClass="timer" text="Scores" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="20.0" />
+      <Button layoutX="60.0" layoutY="31.0" mnemonicParsing="false" onAction="#showPuzzle" prefHeight="41.0" prefWidth="59.0" text="Back" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="20.0" />
+   </children>
+</AnchorPane>
