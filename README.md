@@ -1,2 +1,2 @@
 # Puzzle
-Programowanie objektowe i GUI
+Programowanie obiektowe i GUI
