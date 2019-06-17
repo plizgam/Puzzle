@@ -13,9 +13,6 @@ public class Main extends Application {
     public static Stage myStage;
 
 
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         myStage = primaryStage;
@@ -35,7 +32,6 @@ public class Main extends Application {
         Rectangle2D p = Screen.getPrimary().getVisualBounds();
         myStage.setX((p.getWidth() - myStage.getWidth()) / 2);
         myStage.setY((p.getHeight() - myStage.getHeight()) / 2);
-
     }
 
     public static void main(String[] args) {

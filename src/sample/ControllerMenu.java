@@ -1,8 +1,10 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
@@ -12,6 +14,14 @@ public class ControllerMenu {
     @FXML
     Button ButtonStart;
 
+    @FXML
+    ChoiceBox Levels;
+
+
+    public void initialize()
+    {
+        Levels.setItems(FXCollections.observableArrayList("Easy\t\t\t3x3", "Medium\t\t4x4", "Hard\t\t\t5x5", "Expert\t\t6x6"));
+    }
 
 
     public void showGame() throws Exception{
@@ -28,8 +38,11 @@ public class ControllerMenu {
         //if(file != null)
 
             //todo WYMIENIĆ SOURCE z file.toURI().toString()
-            ControllerPuzzle.myImage = new Image("file:///C:\\Users\\Miłosz\\Desktop\\a.jpg");
+            ControllerPuzzle.myImage = new Image("file:///C:\\Users\\Miłosz\\Desktop\\1.jpg");
+            ControllerPuzzle.size = Levels.getSelectionModel().getSelectedIndex() + 3;
+            ControllerPuzzle.level = Levels.getSelectionModel().getSelectedItem().toString();
             Main.changeScene(FXMLLoader.load(getClass().getResource("Puzzle.fxml")));
+
 
     }
 }
