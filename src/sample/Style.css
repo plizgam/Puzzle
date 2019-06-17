@@ -22,7 +22,7 @@
 }
 
 .PointsAres *.text {
-                -fx-text-alignment: center;
+                -fx-text-alignment: left;
 }
 .PointsAres{
  -fx-font-size: 30px;

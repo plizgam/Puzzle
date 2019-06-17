@@ -38,7 +38,7 @@ public class ControllerMenu {
         //if(file != null)
 
             //todo WYMIENIĆ SOURCE z file.toURI().toString()
-            ControllerPuzzle.myImage = new Image("file:///C:\\Users\\Miłosz\\Desktop\\1.jpg");
+            ControllerPuzzle.myImage = new Image("file:///C:\\Users\\plizgam\\Desktop\\Puzzle\\1.jpg");
             ControllerPuzzle.size = Levels.getSelectionModel().getSelectedIndex() + 3;
             ControllerPuzzle.level = Levels.getSelectionModel().getSelectedItem().toString();
             Main.changeScene(FXMLLoader.load(getClass().getResource("Puzzle.fxml")));

@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="943.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerPuzzle">
 <children>
    <Button fx:id="myButton" layoutX="60.0" layoutY="24.0" mnemonicParsing="false" onAction="#showMenu" prefHeight="44.0" prefWidth="54.0" text="Menu" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <GridPane fx:id="myPane" alignment="CENTER" layoutX="118.0" layoutY="90.0" onMouseClicked="#clickImage" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0">
+      <GridPane fx:id="myPane" alignment="CENTER" hgap="1.0" layoutX="118.0" layoutY="90.0" onMouseClicked="#clickImage" vgap="1.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0">
 
       </GridPane>
       <Label fx:id="myStatus" alignment="CENTER" layoutX="319.0" layoutY="22.0" textFill="#30e42a" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">

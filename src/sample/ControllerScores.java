@@ -27,9 +27,6 @@ public class ControllerScores {
         while (sc.hasNextLine())
             sb.append(sc.nextLine() + "\n");
 
-
-
-
         ScoresArea.setText(sb.toString());
     }
 

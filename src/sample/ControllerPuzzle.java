@@ -28,7 +28,6 @@ public class ControllerPuzzle {
     Button myButton;
     @FXML
     Label myTimer;
-
     @FXML
     CheckBox myCheck;
 
@@ -43,13 +42,9 @@ public class ControllerPuzzle {
     static String level;
     int widthCell , heightCell, x = 0 ,y = 0, GamingTime = 0, colIndex, rowIndex;
     int[] EmptyCell = new int[2];
-    boolean[][] usedPicture;
     boolean isWinner = false;
 
     public void initialize() {
-
-
-        myButton.setGraphic(new ImageView("file:///returnIcon.png"));
 
         modifyGrid();
 
@@ -58,7 +53,6 @@ public class ControllerPuzzle {
 
 
         pieces = new ImageView[size][size];
-        usedPicture = new boolean[size][size];
 
 
         PixelReader reader = myImage.getPixelReader();
@@ -78,43 +72,62 @@ public class ControllerPuzzle {
         }
 
 
-        int m, n;
-
-
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
 
                 if (!(i == size - 1 && j == size - 1)) {
-                    do {
-                        m = (int) (Math.random() * size);
-                        n = (int) (Math.random() * size);
-
-                    } while (usedPicture[m][n]);
-
-                    usedPicture[m][n] = true;
-                    myView = pieces[m][n];
-                    myView.setPreserveRatio(true);
-                    myView.setFitWidth(600/size);
-                    myView.setFitHeight(600/size);
+                    myView = pieces[i][j];
+                    myView.setFitWidth(600 / size);
+                    myView.setFitHeight(400 / size);
                     myPane.add(myView, j, i);
-
                 }
-
             }
         }
 
-        for(int i = 0; i < size; i++)
-            for(int j = 0; j < size; j++)
-                if(!usedPicture[i][j])
-                    cutImage = pieces[i][j];
 
 
 
+        cutImage = pieces[size-1][size-1];
         EmptyCell[0] = size -1;
         EmptyCell[1] = size -1;
 
-
+        randomPuzzles();
         startTimer();
+    }
+
+
+
+    public void randomPuzzles(){
+
+        int m=0,n=0;
+        for(int i = 0; i < 10; i++) {
+
+                switch ((int)(Math.random() * 4)) {
+                    case 0:
+                        m = EmptyCell[0];
+                        n = EmptyCell[1] - 1;
+                        break;
+                    case 1:
+                        m = EmptyCell[0] - 1;
+                        n = EmptyCell[1];
+                        break;
+                    case 2:
+                        m = EmptyCell[0] + 1;
+                        n = EmptyCell[1];
+                        break;
+                    case 3:
+                        m = EmptyCell[0];
+                        n = EmptyCell[1] + 1;
+                        break;
+                }
+
+            if(m >= 0 && n >= 0 && m < size && n < size){
+                ImageView current = pieces[m][n];
+                colIndex = myPane.getColumnIndex(current);
+                rowIndex = myPane.getRowIndex(current);
+                changePosition(current);
+            }
+        }
     }
 
 
@@ -134,7 +147,7 @@ public class ControllerPuzzle {
 
     @FXML
     public void clickImage(javafx.scene.input.MouseEvent event) {
-        if(myStatus.getText() != "You win!") {
+        if(!isWinner) {
             Node clickedNode = event.getPickResult().getIntersectedNode();
             if (clickedNode != myPane) {
                 colIndex = GridPane.getColumnIndex(clickedNode);
@@ -148,7 +161,6 @@ public class ControllerPuzzle {
                         changePosition(clickedNode);
                 }else
                     changePosition(clickedNode);
-
             }
         }
     }
@@ -171,7 +183,7 @@ public class ControllerPuzzle {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
 
-                int colIndex = 0, rowIndex = 0;
+                int colIndex, rowIndex;
                 current = pieces[i][j];
 
                 for (Node node : myPane.getChildren()) {
@@ -189,9 +201,8 @@ public class ControllerPuzzle {
         if (matches == size * size - 1) {
             myStatus.setText("You win!");
             isWinner = true;
-            cutImage.setPreserveRatio(true);
             cutImage.setFitWidth(600/size);
-            cutImage.setFitHeight(600/size);
+            cutImage.setFitHeight(400/size);
             myPane.add(cutImage, EmptyCell[0], EmptyCell[1]);
             saveScore();
         }
@@ -246,5 +257,3 @@ public class ControllerPuzzle {
     }
 
 }
-
-
