@@ -8,6 +8,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
+import java.io.File;
+
 
 public class ControllerMenu {
 
@@ -34,15 +36,12 @@ public class ControllerMenu {
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
 
-        //File file = uploadPhoto.showOpenDialog(Main.myStage);
-        //if(file != null)
-
-            //todo WYMIENIĆ SOURCE z file.toURI().toString()
-            ControllerPuzzle.myImage = new Image("file:///C:\\Users\\plizgam\\Desktop\\Puzzle\\1.jpg");
+        File file = uploadPhoto.showOpenDialog(Main.myStage);
+        if(file != null) {
+            ControllerPuzzle.myImage = new Image(file.toURI().toString());
             ControllerPuzzle.size = Levels.getSelectionModel().getSelectedIndex() + 3;
             ControllerPuzzle.level = Levels.getSelectionModel().getSelectedItem().toString();
             Main.changeScene(FXMLLoader.load(getClass().getResource("Puzzle.fxml")));
-
-
+        }
     }
 }

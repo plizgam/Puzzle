@@ -21,7 +21,7 @@
       </Label>
       <Label fx:id="myTimer" alignment="CENTER" layoutX="136.0" layoutY="37.0" prefHeight="51.0" prefWidth="178.0" styleClass="timer" text="00:00:00" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
       <Button layoutX="110.0" layoutY="17.0" mnemonicParsing="false" onAction="#showScores" prefHeight="44.0" prefWidth="54.0" text="Scores" />
-      <CheckBox fx:id="myCheck" layoutX="220.0" layoutY="30.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="242.0" text="CheckMode" textFill="WHITE" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="5.0">
+      <CheckBox fx:id="myCheck" layoutX="220.0" layoutY="30.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="242.0" selected="true" text="CheckMode" textFill="WHITE" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="5.0">
          <styleClass>
             <String fx:value="PointsAres" />
             <String fx:value="PointsAres1" />

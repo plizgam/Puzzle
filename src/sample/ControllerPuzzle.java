@@ -12,9 +12,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -99,21 +104,21 @@ public class ControllerPuzzle {
 
     public void randomPuzzles(){
 
-        int m=0,n=0;
-        for(int i = 0; i < 10; i++) {
+        int m=0, n=0;
 
+        for(int i = 0; i < 40000; i++) {
                 switch ((int)(Math.random() * 4)) {
                     case 0:
-                        m = EmptyCell[0];
-                        n = EmptyCell[1] - 1;
+                        m = EmptyCell[0] + 1;
+                        n = EmptyCell[1];
                         break;
                     case 1:
                         m = EmptyCell[0] - 1;
                         n = EmptyCell[1];
                         break;
                     case 2:
-                        m = EmptyCell[0] + 1;
-                        n = EmptyCell[1];
+                        m = EmptyCell[0];
+                        n = EmptyCell[1] - 1;
                         break;
                     case 3:
                         m = EmptyCell[0];
@@ -123,9 +128,16 @@ public class ControllerPuzzle {
 
             if(m >= 0 && n >= 0 && m < size && n < size){
                 ImageView current = pieces[m][n];
-                colIndex = myPane.getColumnIndex(current);
-                rowIndex = myPane.getRowIndex(current);
-                changePosition(current);
+                if(myPane.getColumnIndex(current)!= null && myPane.getRowIndex(current) != null) {
+                    colIndex = myPane.getColumnIndex(current);
+                    rowIndex = myPane.getRowIndex(current);
+                    if (((EmptyCell[1] == rowIndex + 1 && EmptyCell[0] == colIndex) ||
+                            (EmptyCell[0] == colIndex + 1 && EmptyCell[1] == rowIndex)
+                            || (EmptyCell[1] == rowIndex - 1 && EmptyCell[0] == colIndex) ||
+                            (EmptyCell[0] == colIndex - 1 && EmptyCell[1] == rowIndex))){
+                        changePosition(current);
+                    }
+                }
             }
         }
     }
@@ -147,6 +159,7 @@ public class ControllerPuzzle {
 
     @FXML
     public void clickImage(javafx.scene.input.MouseEvent event) {
+
         if(!isWinner) {
             Node clickedNode = event.getPickResult().getIntersectedNode();
             if (clickedNode != myPane) {
@@ -157,10 +170,14 @@ public class ControllerPuzzle {
                     if (((EmptyCell[1] == rowIndex + 1 && EmptyCell[0] == colIndex) ||
                             (EmptyCell[0] == colIndex + 1 && EmptyCell[1] == rowIndex)
                             || (EmptyCell[1] == rowIndex - 1 && EmptyCell[0] == colIndex) ||
-                            (EmptyCell[0] == colIndex - 1 && EmptyCell[1] == rowIndex)))
+                            (EmptyCell[0] == colIndex - 1 && EmptyCell[1] == rowIndex))) {
+                       // playSound("click.mp3");
                         changePosition(clickedNode);
+                    }
                 }else
                     changePosition(clickedNode);
+
+
             }
         }
     }
@@ -205,6 +222,12 @@ public class ControllerPuzzle {
             cutImage.setFitHeight(400/size);
             myPane.add(cutImage, EmptyCell[0], EmptyCell[1]);
             saveScore();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            playSound("winner.mp3");
         }
 
     }
@@ -232,12 +255,23 @@ public class ControllerPuzzle {
     }
 
 
+    public void playSound(String url) {
+
+            File file = new File(url);
+            System.out.println(file.toURI().toString());
+            Media media = new Media(file.toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
+
+    }
+
+
     public void saveScore(){
         try
         {
             String filename= "Scores.txt";
             FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-            fw.write(level + "\t\t" + GamingTime + "\n");//appends the string to the file
+            fw.write(level + "\t\t" + String.format("%02d:%02d:%02d", (GamingTime / 3600), ((GamingTime % 3600) / 60), (GamingTime % 60)) + "\n");//appends the string to the file
             fw.close();
             fw.flush();
         }
