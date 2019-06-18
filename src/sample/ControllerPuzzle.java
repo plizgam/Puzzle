@@ -171,7 +171,7 @@ public class ControllerPuzzle {
                             (EmptyCell[0] == colIndex + 1 && EmptyCell[1] == rowIndex)
                             || (EmptyCell[1] == rowIndex - 1 && EmptyCell[0] == colIndex) ||
                             (EmptyCell[0] == colIndex - 1 && EmptyCell[1] == rowIndex))) {
-                       // playSound("click.mp3");
+                        SoundPlayer.playSound("click.mp3");
                         changePosition(clickedNode);
                     }
                 }else
@@ -216,18 +216,13 @@ public class ControllerPuzzle {
             }
 
         if (matches == size * size - 1) {
+            SoundPlayer.playSound("winner.mp3");
             myStatus.setText("You win!");
             isWinner = true;
             cutImage.setFitWidth(600/size);
             cutImage.setFitHeight(400/size);
             myPane.add(cutImage, EmptyCell[0], EmptyCell[1]);
             saveScore();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            playSound("winner.mp3");
         }
 
     }
@@ -255,15 +250,6 @@ public class ControllerPuzzle {
     }
 
 
-    public void playSound(String url) {
-
-            File file = new File(url);
-            System.out.println(file.toURI().toString());
-            Media media = new Media(file.toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
-
-    }
 
 
     public void saveScore(){
